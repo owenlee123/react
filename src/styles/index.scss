@@ -1,0 +1,45 @@
+@import "common";
+@import "animate.css";
+@import "fonts/iconfont.css";
+@import "antd-mobile.css";
+
+
+
+$base_font:20px;
+$base_color:green;
+
+// 全局样式  global 
+html,
+body,
+#app,
+#main {
+    width: 100vw;
+    height: 100vh;
+}
+* { touch-action: pan-y; } 
+.h2 {
+    color: red;
+    font-size: 20px;
+}
+
+.cssbox {
+    width: 200px;
+    height: 200px;
+    background-color: orange;
+    border: 1px solid red;
+    /*no*/
+
+}
+
+.btn {
+    color: red;
+    background-color: #fff;
+}
+
+.move-in {
+    animation: zoomInDown 1s;
+}
+
+.move-out {
+    animation: zoomOutDown 1s;
+}

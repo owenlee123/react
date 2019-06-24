@@ -1,0 +1,10 @@
+{
+    "presets": [  //预设
+        "env",
+        "react",
+        "stage-0"
+    ],
+    "plugins": [
+        "transform-decorators-legacy",
+    ]
+}
