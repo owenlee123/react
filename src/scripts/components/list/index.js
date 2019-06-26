@@ -51,24 +51,7 @@ export class List extends Component {
                             this.setState({ refreshing: true }); // 正在刷新
                             setTimeout(() => {
                                 console.log(this.props);
-                                this.props.dispatch(getReverseGoods())
-                                // changeAllGoods()
-                                //   axios.get("/vue/getGoodByType",{
-                                //       params:{
-                                //           type:type.value
-                                //       }
-                                //   }).then(res=>{
-                                //       console.log(res);
-                                //       var data =  res.data.result;
-                                //       data.reverse();
-                                //       this.setState({
-                                //           data:data,
-                                //           count:++this.state.count
-                                //       })
-                                //       console.log(this.state.data);
-                                //       this.setState({ refreshing: false });  // 刷新结束 
-                                //   })
-
+                                this.props.dispatch(getReverseGoods());
                                 this.setState({ refreshing: false });  // 刷新结束 
                             }, 1000);
                         }}

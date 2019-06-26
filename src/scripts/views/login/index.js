@@ -3,11 +3,16 @@ import "./index.scss";
 import { Head } from "~/components/head";
 import { WingBlank, WhiteSpace, SearchBar, List, InputItem, Button } from "antd-mobile";
 import axios from "@/utils/axios";
+import { connect } from "react-redux";
+import { changeIsLogin } from "../../actions";
 
 export const mobileReg = /^1(3|5|7|8|9)\d{9}$/;
 export const codeReg = /^\d{4}$/;
 
 let timer = null;
+@connect(
+    state => ({ ...state.data })
+)
 export class Login extends Component {
     state = {
         toggle: true,
@@ -87,8 +92,10 @@ export class Login extends Component {
                 var userInfo = {
                     token: res.data.token
                 }
+                this.props.dispatch(changeIsLogin(true))
                 sessionStorage.userInfo = JSON.stringify(userInfo)
-            }else{
+                localStorage.userphone = res.data.mobile;
+            } else {
                 delete sessionStorage["userInfo"];
             }
         })
@@ -99,6 +106,7 @@ export class Login extends Component {
         return (
             <div>
                 <Head title="登录" show={true}></Head>
+                <div style={{ width: "100%", height: "45px" }}></div>
                 <WingBlank>
                     <List>
                         <WhiteSpace />

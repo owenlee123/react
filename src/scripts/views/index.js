@@ -35,7 +35,7 @@ export class Layout extends Component {
                 <Route path="/app/" strict component={App} />
                 <Route path="/search" component={Search} />
                 <Route path="/login" component={Login} />
-                <Route path="/good/detail/:goodId?" component={Good} />
+                <Route path="/good/detail/:newsId?" component={Good} />
                 <Route
                     render={
                         () => (<Redirect to="/app/" />)

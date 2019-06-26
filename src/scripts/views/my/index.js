@@ -1,27 +1,62 @@
 
 import "./index.scss";
-import { Head } from "~/components/head";
-import { Button } from 'antd-mobile';
+import { Mhead } from "~/components/mHead";
+import { Accordion, List, WhiteSpace, Button } from 'antd-mobile';
+import { connect } from "react-redux";
+import { changeIsLogin } from "../../actions";
 
+@connect(
+    state => ({ ...state.data })
+)
 export class My extends Component {
-    state = {
-        isLogin: false
-    }
+
+    
     goLogin = () => {
         const { history } = this.props;
         history.push("/login");
     }
+
+    // 注销
+    delUserPhone = () => {
+        const { dispatch } = this.props;
+        delete localStorage["userphone"];
+        dispatch(changeIsLogin(false))
+    }
+
     render() {
-        const { isLogin } = this.state;
+        console.log(this.props);
+        const { isLogin } = this.props;
         return (
             <div>
-                <Head title="个人中心" show={true}></Head>
-                <h2>my-my-my</h2>
-                <div style={{ display: isLogin ? "block" : "none" }}>
-                    <h2>你的账户 === {13212341234}</h2>
-                    <img src={require("@/assets/images/photo.png")} alt="" />
+                <Mhead />
+                <div style={{ width: "100%", height: "45px" }}></div>
+                <div className="user-info" style={{ display: !isLogin ? "block" : "none" }}>
+                    <div className="info-pic" onClick={this.goLogin}>
+                        <img src={require("@/assets/images/default_pic.jpg")} alt="" />
+                    </div>
+                    <div className="info-name">未登录</div>
                 </div>
-                <Button onClick={this.goLogin} style={{ display: !isLogin ? "inline-block" : "none" }} type="primary" inline size="large">马上登录</Button>
+
+                <div className="user-info" style={{ display: isLogin ? "block" : "none" }}>
+                    <div className="info-pic" onClick={this.goLogin}>
+                        <img src={require("@/assets/images/photo.png")} alt="" />
+                    </div>
+                    <div className="info-name">欢迎{localStorage.userphone}用户</div>
+                    <Button size="small" onClick={this.delUserPhone}>注销</Button>
+                </div>
+
+                <WhiteSpace />
+                <Accordion defaultActiveKey="0" className="my-accordion" onChange={this.onChange}>
+                    <Accordion.Panel header="收藏的文章">
+                        <List className="my-list">
+                            <List.Item>content 1</List.Item>
+                            <List.Item>content 2</List.Item>
+                            <List.Item>content 3</List.Item>
+                            <List.Item>content 4</List.Item>
+                        </List>
+                    </Accordion.Panel>
+                </Accordion>
+
             </div>
         )
     }

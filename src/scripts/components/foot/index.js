@@ -1,14 +1,13 @@
 
 
 export const foots = [
-    { txt: "首页", path: "/app/home", name: "home", icon: "icon-yidiandiantubiao04" },
-    { txt: "分类", path: "/app/classify", name: "classify", icon: "icon-fenlei" },
-    { txt: "购物车", path: "/app/cart", name: "cart", icon: "icon-gouwuche" },
+    { txt: "首页", path: "/app/home", name: "home", icon: "icon-zuqiuxie" },
+    { txt: "英超", path: "/app/gbr", name: "gbr", icon: "icon-zuqiu-copy" },
+    { txt: "西甲", path: "/app/esp", name: "esp", icon: "icon-zuqiu1" },
     { txt: "我", path: "/app/my", name: "my", icon: "icon-wo" }
 ]
 import "./index.scss";
 import { Link, NavLink } from "react-router-dom";
-import { Badge } from "antd-mobile";
 
 export const Foot = () => {
     return (
@@ -20,7 +19,6 @@ export const Foot = () => {
                             <NavLink to={item.path} activeClassName="nav-active">
                                 <i className={"iconfont " + item.icon}></i>
                                 <span>{item.txt}</span>
-                                {i==2&&<Badge className="hot" text={8} style={{ marginLeft: 12 }}></Badge>}
                             </NavLink>
                         </div>
                     )

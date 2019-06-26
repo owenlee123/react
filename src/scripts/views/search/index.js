@@ -1,11 +1,11 @@
 import "./index.scss";
 
-import { Head } from "~/components/head";
 import { SearchBar } from "antd-mobile";
 import axios from "@/utils/axios"
 import { List } from "~/components/list"
 import { connect } from "react-redux";
 import { getSearchGoods } from "../../actions";
+import { Mhead } from "~/components/mHead";
 
 @connect(
     state => {
@@ -15,30 +15,16 @@ import { getSearchGoods } from "../../actions";
     }
 )
 export class Search extends Component {
-
-    state = {
-        goods: []
-    }
-
     getSearch = () => {
         console.log(this.word);  //用的antd-mobile库一定要加state
         const { dispatch } = this.props;
         dispatch(getSearchGoods({
-            url: "/vue/getGoodList",
+            url: "/react/getSearchList",
             params: {
                 keyword: this.word.state.value
             },
             cb() { console.log("search success") }
         }))
-        // axios.get("/vue/getGoodList", {
-        //     params: {
-        //         keyword: this.refs.one.state.value
-        //     }
-        // }).then(res => {
-        //     this.setState({
-        //         goods: res.data.result
-        //     })
-        // })
     }
     changeGoods = () => {
         this.state.goods.reverse();
@@ -51,7 +37,8 @@ export class Search extends Component {
         const { goods } = this.props;
         return (
             <div>
-                <Head title="搜索" show={true}></Head>
+                <Mhead />
+                <div style={{ width: "100%", height: "45px" }}></div>
                 <SearchBar ref={el => this.word = el} placeholder="Search" maxLength={8} onBlur={this.getSearch} />
                 {/* 上面代码中onChange事件一定有个参数val  就是你输入的值 */}
                 <List

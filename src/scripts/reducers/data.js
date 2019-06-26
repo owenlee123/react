@@ -1,11 +1,13 @@
-import { COUNTADD, GETBANNER, GETSEARCHGOODS, GETREVERSEGOODS } from "../actions";
+import { COUNTADD, GETBANNER, GETSEARCHGOODS, GETREVERSEGOODS, GETNEWS, CHANGEISLOGIN } from "../actions";
 
 
 const defaultState = {
     count: 20000,
     banner: [],
+    news: [],
     goods: [],
-    carNum: 10
+    carNum: 10,
+    isLogin: false
 }
 
 export default (state = defaultState, action) => {
@@ -20,8 +22,16 @@ export default (state = defaultState, action) => {
             return { ...state, banner: action.banner }
             break;
 
+        case GETNEWS:
+            return { ...state, news: action.news }
+            break;
+
         case GETSEARCHGOODS:
             return { ...state, goods: action.goods }
+            break;
+
+        case CHANGEISLOGIN:
+            return { ...state, isLogin: action.flag }
             break;
 
         case GETREVERSEGOODS:

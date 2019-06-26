@@ -23,23 +23,14 @@ export class Mfoot extends Component {
             selectedTab: name
         })
     }
-    componentWillUpdate() {  //会进入死循环
-        console.log("11111")
-        // const { location } = this.context.props;
-        // var pathname = location.pathname.split("/app/");
-        // var name = pathname[1];
-        // this.setState({
-        //     selectedTab: name
-        // })
-    }
     render() {
         console.log(this.props);
         return (
             <div className="footer">
                 <TabBar
-                    unselectedTintColor="#949494"
-                    tintColor="#33A3F4"
-                    barTintColor="white"
+                    unselectedTintColor="#ccc"
+                    tintColor="#f71d1d"
+                    barTintColor="#fff"
                 >
                     {
                         foots.map((foot, i) => {
@@ -66,7 +57,6 @@ export class Mfoot extends Component {
                                     />
                                     }
                                     selected={this.state.selectedTab === foot.name}
-                                    badge={i==2&&10}
                                     onPress={() => {
                                         console.log(this.context);
                                         const { history } = this.context.props;

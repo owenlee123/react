@@ -16,7 +16,11 @@ body,
     width: 100vw;
     height: 100vh;
 }
-* { touch-action: pan-y; } 
+
+* {
+    touch-action: none;
+}
+
 .h2 {
     color: red;
     font-size: 20px;
@@ -42,4 +46,8 @@ body,
 
 .move-out {
     animation: zoomOutDown 1s;
+}
+
+.move-fade {
+    animation: fadeInDown 1s;
 }

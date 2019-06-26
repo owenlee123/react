@@ -23,6 +23,19 @@ export const getBanner = ({ url, params, cb }) => {
     });
 }
 
+export const GETNEWS = "GETNEWS";
+export const getNews = ({ url, params, cb }) => {
+    return axios.get(url, {
+        params
+    }).then(res => {
+        cb();
+        return {
+            type: GETNEWS,
+            news: res.data.result
+        }
+    });
+}
+
 export const GETSEARCHGOODS = "getSearchGoods";
 export const getSearchGoods = ({ url, params, cb }) => {
     return axios.get(url, {
@@ -34,6 +47,14 @@ export const getSearchGoods = ({ url, params, cb }) => {
             goods: res.data.result
         }
     });
+}
+
+export const CHANGEISLOGIN = "changeIsLogin";
+export const changeIsLogin = (flag) => {
+    return {
+        type: CHANGEISLOGIN,
+        flag
+    }
 }
 
 export const GETREVERSEGOODS = "getReverseGoods";

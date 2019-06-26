@@ -1,0 +1,145 @@
+.article {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding: 20px 0;
+
+    h1.title {
+        margin: 0 40px;
+        padding-top: 24px;
+        padding-bottom: 20px;
+        line-height: 70px;
+        font-weight: 700;
+        font-size: 50px;
+        color: #333;
+        text-align: justify;
+    }
+
+    .article-info {
+        margin: 0 40px;
+        font-size: 26px;
+
+        #fontAdd {
+            margin-left: 150px;
+        }
+
+        button {
+            margin-right: 20px;
+            font-Size: 12px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .info-data {
+            color: #999;
+            font-style: normal;
+            margin-right: 20px;
+        }
+
+        .info-via {
+            color: #999;
+        }
+
+        .info-comment {
+            background-position: left center;
+            float: right;
+            padding-left: 60px;
+            color: #999;
+        }
+    }
+
+    .article-content {
+        margin: 30px 40px;
+        font-size: 36px;
+        color: #333;
+        word-wrap: break-word;
+        overflow: hidden;
+
+        section {
+            p {
+                margin: 24px 0;
+                line-height: 60px;
+                padding: 0;
+                text-align: justify;
+                text-indent: 2em;
+
+                span.img {
+                    display: block;
+                    font-size: 0;
+                    line-height: 0;
+                    text-align: center;
+                    overflow: hidden;
+
+                    img {
+                        display: block;
+                        width: auto;
+                        max-width: 100%;
+                        margin: 0 auto;
+                    }
+                }
+            }
+
+            p.articleCopyright {
+                line-height: 60px;
+                margin: 30px 0;
+                color: #999;
+                font-size: 32px;
+                text-indent: 0;
+            }
+        }
+    }
+}
+
+.article-like {
+    text-align: center;
+    overflow: hidden;
+
+    .like-button {
+        display: block;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+    }
+
+    i {
+        display: block;
+        line-height: 56px;
+        font-size: 28px;
+        font-style: normal;
+        color: #333;
+    }
+
+    .cang-button {
+        display: block;
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+    }
+}
+
+.article-share {
+    padding: 10px 38px;
+    overflow: hidden;
+
+    .share {
+        span {
+            float: left;
+            line-height: 44px;
+            margin-top: 14px;
+            margin-right: 24px;
+            color: #999;
+            font-size: 24px;
+        }
+
+        .vRes_share {
+            background-color: #fff;
+            overflow: hidden;
+
+            a {
+                float: left;
+                margin-right: 8px;
+                width: 72px;
+                height: 72px;
+            }
+        }
+    }
+}
