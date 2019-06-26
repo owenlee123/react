@@ -1,0 +1,33 @@
+#vHeader_wrap {
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    background-color: rgba(189, 184, 184, 0.8);
+    z-index: 999;
+
+    h1 {
+        width: 125px;
+        height: 60px;
+
+        a {
+            display: block;
+            width: 80px;
+            height: 30px;
+            padding: 25px;
+            font-size: 30px;
+            color: red;
+        }
+    }
+
+    .vHeader_icons {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        a {
+            width: 80px;
+            height: 80px;
+            float: left;
+        }
+    }
+}
