@@ -19,10 +19,22 @@
     }
 
     .info-name {
-        font-size:24px;
+        font-size: 24px;
         padding-top: 12px;
         color: #fff;
         text-align: center;
         line-height: 48px;
+    }
+}
+
+#link_btn {
+    .am-list-item {
+        width: 85%;
+        float: left;
+    }
+
+    .am-button {
+        float: right;
+        margin: 8px 8px 0 0;
     }
 }

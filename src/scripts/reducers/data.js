@@ -1,4 +1,4 @@
-import { COUNTADD, GETBANNER, GETSEARCHGOODS, GETREVERSEGOODS, GETNEWS, CHANGEISLOGIN } from "../actions";
+import { COUNTADD, GETBANNER, GETSEARCHGOODS, GETREVERSEGOODS, GETNEWS, CHANGEISLOGIN, GETUSERCOLLECT } from "../actions";
 
 
 const defaultState = {
@@ -7,7 +7,8 @@ const defaultState = {
     news: [],
     goods: [],
     carNum: 10,
-    isLogin: false
+    isLogin: false,
+    collects: []
 }
 
 export default (state = defaultState, action) => {
@@ -36,6 +37,10 @@ export default (state = defaultState, action) => {
 
         case GETREVERSEGOODS:
             return { ...state, goods: state.goods.reverse() }
+            break;
+
+        case GETUSERCOLLECT:
+            return { ...state, collects: action.collects }
             break;
 
         default:

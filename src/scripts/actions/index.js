@@ -57,6 +57,19 @@ export const changeIsLogin = (flag) => {
     }
 }
 
+export const GETUSERCOLLECT = "getUserCollect";
+export const getUserCollect = ({ url, params, cb }) => {
+    return axios.get(url, {
+        params
+    }).then(res => {
+        cb();
+        return {
+            type: GETUSERCOLLECT,
+            collects: res.data.result
+        }
+    });
+}
+
 export const GETREVERSEGOODS = "getReverseGoods";
 export const getReverseGoods = () => {
     return {

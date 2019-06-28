@@ -11,6 +11,7 @@ import weixin from '@/assets/images/weixin.png';
 import qzone from '@/assets/images/qzone.png';
 import cang from '@/assets/images/cang.png';
 import cang2 from '@/assets/images/cang2.png';
+import { Toast } from 'antd-mobile';
 
 var commentStyle = {
     backgroundImage: `url(${infoComment})`,
@@ -119,22 +120,28 @@ export class Good extends Component {
     }
     // 收藏
     collectArt = () => {
-        axios.post("/react/collectArt", {
-            newsId: this.props.match.params.newsId,
-            news: JSON.stringify(this.state.data),
-            userphone: localStorage.userphone
-        }).then(res => {
-            console.log(res);
-            if (res.data.type) {
-                this.setState({
-                    collectFlag: true
-                });
-            } else {
-                this.setState({
-                    collectFlag: false
-                });
-            }
-        })
+        if (localStorage.userphone) {
+            axios.post("/react/collectArt", {
+                newsId: this.props.match.params.newsId,
+                news: JSON.stringify(this.state.data),
+                userphone: localStorage.userphone
+            }).then(res => {
+                console.log(res);
+                if (res.data.type) {
+                    this.setState({
+                        collectFlag: true
+                    });
+                } else {
+                    this.setState({
+                        collectFlag: false
+                    });
+                }
+            })
+        } else {
+            Toast.info('您还未登录,无法收藏该文章,即将跳转登录页面...', 2, () => {
+                this.props.history.push("/login");
+            });
+        }
     }
 
     render() {

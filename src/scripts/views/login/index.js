@@ -88,13 +88,14 @@ export class Login extends Component {
         }).then(res => {
             console.log(res);
             if (!!res.data.type) {
+                localStorage.userphone = res.data.mobile;  //先存在跳转
+                this.props.dispatch(changeIsLogin(true))
                 this.props.history.push("/app/my");
                 var userInfo = {
                     token: res.data.token
                 }
-                this.props.dispatch(changeIsLogin(true))
+                
                 sessionStorage.userInfo = JSON.stringify(userInfo)
-                localStorage.userphone = res.data.mobile;
             } else {
                 delete sessionStorage["userInfo"];
             }
