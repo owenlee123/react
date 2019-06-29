@@ -12,6 +12,12 @@ import qzone from '@/assets/images/qzone.png';
 import cang from '@/assets/images/cang.png';
 import cang2 from '@/assets/images/cang2.png';
 import { Toast } from 'antd-mobile';
+import { dateFormat } from "@/utils/date";
+
+
+import comments from "~/mobx/comments";   //导入mobx
+import { observer } from "mobx-react";
+console.log(comments);
 
 var commentStyle = {
     backgroundImage: `url(${infoComment})`,
@@ -62,12 +68,14 @@ var afterCangStyle = {
     backgroundRepeat: "no-repeat"
 }
 
+@observer
 export class Good extends Component {
     state = {
         data: {},
         fontSize: 20,
         likeFlag: false,
-        collectFlag: false
+        collectFlag: false,
+        isLogin: false
     }
 
     componentWillMount() {
@@ -80,7 +88,11 @@ export class Good extends Component {
             this.setState({
                 data: res.data.result
             })
+        });
+        this.setState({
+            isLogin: localStorage.userphone ? true : false
         })
+        comments.getComments(this.props.match.params.newsId);  //获取评论
     }
     // 改变文章字体大小
     changeBig = () => {
@@ -143,6 +155,33 @@ export class Good extends Component {
             });
         }
     }
+    // 去登录
+    goToLogin = () => {
+        this.props.history.push("/login")
+    }
+    // 添加评论
+    postComments = () => {
+        var msg = this.one.value;
+        var newTime = dateFormat(new Date());
+        var userphone = localStorage.userphone;
+        if (localStorage.userphone) {
+            if (msg) {
+                comments.postComments({
+                    msg,
+                    newTime,
+                    userphone,
+                    newsId: this.props.match.params.newsId
+                })
+                this.one.value = "";
+                comments.getComments(this.props.match.params.newsId);
+            }else{
+                Toast.info('评论不能为空', 2);
+            }
+        } else {
+            Toast.info('您还未登录,无法进行评论', 2);
+            this.one.value = "";
+        }
+    }
 
     render() {
         const {
@@ -154,10 +193,11 @@ export class Good extends Component {
             p2,
             p3,
             articleCopyright,
-            like
+            like,
         } = this.state.data;
-        console.log(this.state.data);
-        const { fontSize, likeFlag, collectFlag } = this.state;
+        const { fontSize, likeFlag, collectFlag, isLogin } = this.state;
+        const { commentslist } = comments;
+        console.log(commentslist);
         return (
             <div>
                 <Mhead />
@@ -201,6 +241,54 @@ export class Good extends Component {
                             <a className="weibo" style={weiboStyle}></a>
                             <a className="weixin" style={weixinStyle}></a>
                             <a className="qzone" style={qzoneStyle}></a>
+                        </div>
+                    </div>
+                </div>
+                {/* 评论 */}
+                <div id="comment">
+                    <div className="vComment_header">
+                        <h2>网友评论</h2>
+                    </div>
+                    <div className="vComment_topInputBox">
+                        <div className="vComment_topInputBox_header">
+                            <span>我要评论</span>
+                            <div onClick={this.goToLogin} className="btns" style={{ display: !isLogin ? "block" : "none" }}>
+                                <a>登录</a>
+                                <a>注册</a>
+                            </div>
+                            <div className="btns" style={{ display: isLogin ? "block" : "none" }}>用户{localStorage.userphone}</div>
+                        </div>
+                        <div className="vComment_input">
+                            <textarea ref={el => this.one = el} className="vComment_input_text" placeholder="说说你的看法..."></textarea>
+                            <input onClick={this.postComments} className="vComment_input_submit" type="submit" value="发表评论"></input>
+                        </div>
+                    </div>
+                    <div className="vComment_hotList">
+                        <div className="vComment_list">
+                            <h3>热门评论</h3>
+                            <ul>
+                                {
+                                    commentslist.map((c, i) => {
+                                        return (
+                                            <li key={i}>
+                                                <div className="vComment_item">
+                                                    <div className="vComment_item_top">
+                                                        <img src={require("@/assets/images/photo.png")} alt="" />
+                                                        <span>{c.userphone}</span>
+                                                    </div>
+                                                    <div className="vComment_item_main">
+                                                        <p>{c.msg}</p>
+                                                    </div>
+                                                    <div className="vComment_item_bottom">
+                                                        <i className="data">{c.newTime}</i>
+                                                        <span className="source">来自Android客户端</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
                         </div>
                     </div>
                 </div>
