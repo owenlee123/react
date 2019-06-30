@@ -89,14 +89,14 @@ module.exports = {
         hot: true,
         inline: true,
         // open:true,
-        publicPath: "",
+        publicPath: "",  //设置打包的相对路径
         proxy: { //代理
             "/vue": {
-                target: "http://localhost:1901/",
+                target: "http://47.102.217.191:6300/",
                 changeOrigin: true,
             },
             "/react": {
-                target: "http://localhost:1901/",
+                target: "http://47.102.217.191:2000/",
                 changeOrigin: true,
             }
         }
