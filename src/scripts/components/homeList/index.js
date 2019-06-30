@@ -9,9 +9,7 @@ import { getNews } from "../../actions";
 )
 export class HomeList extends Component {
     componentDidMount() {
-        console.log(this.props);
-        const { dispatch } = this.props;
-        dispatch(getNews({
+        this.props.dispatch(getNews({
             url: "/react/getListNews",
             params: {
                 type: "internation"

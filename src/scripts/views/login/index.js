@@ -94,7 +94,7 @@ export class Login extends Component {
                 var userInfo = {
                     token: res.data.token
                 }
-                
+
                 sessionStorage.userInfo = JSON.stringify(userInfo)
             } else {
                 delete sessionStorage["userInfo"];
@@ -132,6 +132,13 @@ export class Login extends Component {
                         <Button type="primary" disabled={toggle} onClick={this.autoLogin}>马上登录</Button>
                     </List>
                 </WingBlank>
+                <WhiteSpace />
+                <WhiteSpace />
+                <Button icon="check-circle-o" type="ghost" size="small" style={{ margin: '0 26px' }}>QQ登录</Button>
+                <WhiteSpace />
+                <Button icon="check-circle-o" type="ghost" size="small" style={{ margin: '0 26px' }}>微信登录</Button>
+                <WhiteSpace />
+                <Button icon="check-circle-o" type="ghost" size="small" style={{ margin: '0 26px' }}>新浪微博</Button>
             </div>
         )
     }

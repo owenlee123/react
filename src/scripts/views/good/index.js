@@ -2,7 +2,7 @@
 
 import "./index.scss"
 import { Mhead } from "~/components/mHead";
-import axios from "@/utils/axios"
+import axios from "@/utils/axios";
 import infoComment from '@/assets/images/info-comment.png';
 import beforelike from '@/assets/images/beforelike.png';
 import afterlike from '@/assets/images/afterlike.png';
@@ -88,12 +88,14 @@ export class Good extends Component {
             this.setState({
                 data: res.data.result
             })
+            comments.getComments(this.props.match.params.newsId);
         });
         this.setState({
             isLogin: localStorage.userphone ? true : false
         })
-        comments.getComments(this.props.match.params.newsId);  //获取评论
+
     }
+
     // 改变文章字体大小
     changeBig = () => {
         this.setState({
@@ -171,10 +173,20 @@ export class Good extends Component {
                     newTime,
                     userphone,
                     newsId: this.props.match.params.newsId
+                }, () => {
+                    comments.getComments(this.props.match.params.newsId);
                 })
                 this.one.value = "";
-                comments.getComments(this.props.match.params.newsId);
-            }else{
+
+                // news表中该文章评论数+1
+                axios.get("/react/commentAdd", {
+                    params: {
+                        newsId: this.props.match.params.newsId
+                    }
+                }).then(res => {
+                    console.log(res);
+                });
+            } else {
                 Toast.info('评论不能为空', 2);
             }
         } else {
@@ -183,11 +195,18 @@ export class Good extends Component {
         }
     }
 
+    // 锚点滚动
+    scrollToAnchor = (anchorName) => {
+        if (anchorName) {
+            let anchorElement = document.getElementById(anchorName);
+            if (anchorElement) { anchorElement.scrollIntoView(); }
+        }
+    }
+
     render() {
         const {
             title,
             time,
-            comment,
             articlepic,
             p1,
             p2,
@@ -196,8 +215,8 @@ export class Good extends Component {
             like,
         } = this.state.data;
         const { fontSize, likeFlag, collectFlag, isLogin } = this.state;
-        const { commentslist } = comments;
-        console.log(commentslist);
+        const { commentslist, artComNum } = comments;
+        console.log(commentslist, artComNum);
         return (
             <div>
                 <Mhead />
@@ -210,7 +229,7 @@ export class Good extends Component {
                         <button id="fontAdd" onClick={this.changeBig}>A<sup>+</sup></button>
                         <button id="fontDes" onClick={this.changeSmall}>A<sup>-</sup></button>
                         <i className="iconfont icon-shoucang"></i>
-                        <a className="info-comment" style={commentStyle}>{comment}</a>
+                        <a onClick={() => this.scrollToAnchor('comment')} className="info-comment" style={commentStyle}>{commentslist.length}</a>
                     </div>
                     <div className="article-content" style={{ fontSize }}>
                         <section>

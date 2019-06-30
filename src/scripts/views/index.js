@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { Search } from "./search";
 import { Login } from "./login";
 import { Good } from "./good";
-import { Comment } from "./comment";
 export class IndexView extends Component {
     render() {
         return (
@@ -37,7 +36,6 @@ export class Layout extends Component {
                 <Route path="/search" component={Search} />
                 <Route path="/login" component={Login} />
                 <Route path="/good/detail/:newsId?" component={Good} />
-                <Route path="/my/comment" component={Comment} />
                 <Route
                     render={
                         () => (<Redirect to="/app/" />)
